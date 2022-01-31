@@ -21,8 +21,7 @@ public class CartTests extends BaseTest {
 
         assertThat(productsCountInCart).isEqualTo(1);
 
-        ICart iCart = application
-                .goToCart();
+        ICart iCart = application.goToCart();
         ProductItem productItem = iCart
                 .getAllItemsInCart()
                 .get(0);
@@ -37,8 +36,5 @@ public class CartTests extends BaseTest {
                 .goToItems()
                 .openMenu()
                 .logout();
-
-
     }
-
 }
