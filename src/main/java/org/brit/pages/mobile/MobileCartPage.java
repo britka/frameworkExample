@@ -8,6 +8,7 @@ import static com.codeborne.selenide.Selenide.Wait;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.functions.ExpectedCondition;
 import java.time.Duration;
@@ -27,18 +28,18 @@ import org.openqa.selenium.WebDriver;
 public class MobileCartPage extends MobileBasePage {
 
     public MobileAllItemsPage continueShopping() {
-       scrollUntilElementIsVisibleAndClick($(MobileBy.AccessibilityId("test-CONTINUE SHOPPING")));
+       scrollUntilElementIsVisibleAndClick($(AppiumBy.accessibilityId("test-CONTINUE SHOPPING")));
         return new MobileAllItemsPage();
     }
 
     @SneakyThrows
     public List<ProductItem> getAllItemsFromPage() {
-        SelenideElement listElement = $(MobileBy.AccessibilityId("test-Cart Content"));
+        SelenideElement listElement = $(AppiumBy.accessibilityId("test-Cart Content"));
         Set<ProductItem> productItems = new HashSet<>();
 
         while (true) {
             List<SelenideElement> fullProducts = new ArrayList<>();
-            ElementsCollection products = listElement.$$(MobileBy.AccessibilityId("test-Item"));
+            ElementsCollection products = listElement.$$(AppiumBy.accessibilityId("test-Item"));
             for (SelenideElement element : products) {
                 ElementsCollection childElements = element
                         .$$x(".//*");
@@ -53,12 +54,12 @@ public class MobileCartPage extends MobileBasePage {
             for (SelenideElement element : fullProducts) {
                 ProductItem productItem = new ProductItem();
 
-                ElementsCollection description = element.$(MobileBy.AccessibilityId("test-Description"))
+                ElementsCollection description = element.$(AppiumBy.accessibilityId("test-Description"))
                         .$$x(".//android.widget.TextView");
 
                 productItem.itemName(description.get(0).text());
                 productItem.description(description.get(1).text());
-                SelenideElement price = element.$(MobileBy.AccessibilityId("test-Price"))
+                SelenideElement price = element.$(AppiumBy.accessibilityId("test-Price"))
                         .$(By.xpath(".//android.widget.TextView"));
                 productItem.price(convertDollarStringToDouble(price.text()));
                 productItems.add(productItem);
@@ -69,10 +70,10 @@ public class MobileCartPage extends MobileBasePage {
 
     public MobileCartPage removeProductFromCart(String productName) {
         while (true) {
-            SelenideElement element = $(MobileBy.AccessibilityId("test-PRODUCTS"))
-                    .$$(MobileBy.AccessibilityId("test-Item"))
+            SelenideElement element = $(AppiumBy.accessibilityId("test-PRODUCTS"))
+                    .$$(AppiumBy.accessibilityId("test-Item"))
                     .find(Condition.exactText(productName))
-                    .$(MobileBy.AccessibilityId("test-REMOVE"));
+                    .$(AppiumBy.accessibilityId("test-REMOVE"));
             if (element.is(Condition.visible)) {
                 element.click();
                 scrollUpToTop();
@@ -84,7 +85,7 @@ public class MobileCartPage extends MobileBasePage {
     }
 
     public MobileCheckout1Page checkout() {
-        scrollUntilElementIsVisibleAndClick($(MobileBy.AccessibilityId("test-CHECKOUT")));
+        scrollUntilElementIsVisibleAndClick($(AppiumBy.accessibilityId("test-CHECKOUT")));
         return new MobileCheckout1Page();
     }
 }

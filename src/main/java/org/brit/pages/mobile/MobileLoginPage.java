@@ -5,14 +5,15 @@ import static com.codeborne.selenide.Selenide.sleep;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 
 public class MobileLoginPage extends MobileBasePage {
 
-    private final SelenideElement userNameField = $(MobileBy.AccessibilityId("test-Username"));
-    private final SelenideElement passwordField = $(MobileBy.AccessibilityId("test-Password"));
-    private final SelenideElement loginButton = $(MobileBy.AccessibilityId("test-LOGIN"));
+    private final SelenideElement userNameField = $(AppiumBy.accessibilityId("test-Username"));
+    private final SelenideElement passwordField = $(AppiumBy.accessibilityId("test-Password"));
+    private final SelenideElement loginButton = $(AppiumBy.accessibilityId("test-LOGIN"));
 
     public MobileAllItemsPage login(String userName, String userPass) {
         userNameField

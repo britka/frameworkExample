@@ -9,6 +9,7 @@ import java.io.File;
 import java.net.URL;
 import javax.annotation.Nonnull;
 import lombok.SneakyThrows;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -18,20 +19,19 @@ public class AndroidDriverProvider implements WebDriverProvider {
 
     @SneakyThrows
     @Nonnull
-    @Override
-    public WebDriver createDriver(DesiredCapabilities desiredCapabilities) {
+    public WebDriver createDriver(Capabilities desiredCapabilities) {
         closeWebDriver();
-        Configuration.startMaximized = false;
+       // Configuration.startMaximized = false;
         Configuration.browserSize = null;
         DesiredCapabilities capability = new DesiredCapabilities();
         capability.setCapability("deviceName", "emulator-5554");
-        capability.setCapability("platformVersion", "11");
+      //  capability.setCapability("platformVersion", "10");
         capability.setCapability("platformName", "Android");
         capability.setCapability("app", new File("app/app.apk").getAbsolutePath());
         capability.setCapability("appPackage", "com.swaglabsmobileapp");
         capability.setCapability("appActivity", ".MainActivity");
        // desiredCapabilities.merge(capability);
-        androidDriver = new AndroidDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), capability);
+        androidDriver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capability);
         return androidDriver;
     }
 }

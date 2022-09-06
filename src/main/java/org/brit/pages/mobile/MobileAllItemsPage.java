@@ -13,6 +13,7 @@ import static java.time.Duration.ofMillis;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
@@ -35,15 +36,15 @@ public class MobileAllItemsPage extends MobileBasePage {
 
     @SneakyThrows
     public List<ProductItem> getAllItemsFromPage() {
-        SelenideElement listElement = $(MobileBy.AccessibilityId("test-PRODUCTS"));
+        SelenideElement listElement = $(AppiumBy.accessibilityId("test-PRODUCTS"));
         Set<ProductItem> productItems = new HashSet<>();
 
         while (true) {
             List<SelenideElement> fullProducts = new ArrayList<>();
-            ElementsCollection products = listElement.$$(MobileBy.AccessibilityId("test-Item"));
+            ElementsCollection products = listElement.$$(AppiumBy.accessibilityId("test-Item"));
             for (SelenideElement element : products) {
                 ElementsCollection childElements = element
-                        .$(MobileBy.xpath("./android.view.ViewGroup"))
+                        .$(AppiumBy.xpath("./android.view.ViewGroup"))
                         .$$x(".//*");
                 if (childElements.size() == 11) {
                     fullProducts.add(element);
@@ -56,9 +57,9 @@ public class MobileAllItemsPage extends MobileBasePage {
             for (SelenideElement element : fullProducts) {
                 ProductItem productItem = new ProductItem();
                 SelenideElement productElement = element
-                        .$(MobileBy.xpath("./android.view.ViewGroup"));
-                productItem.itemName(productElement.$(MobileBy.AccessibilityId("test-Item title")).text());
-                productItem.price(convertDollarStringToDouble(productElement.$(MobileBy.AccessibilityId("test-Price")).text()));
+                        .$(AppiumBy.xpath("./android.view.ViewGroup"));
+                productItem.itemName(productElement.$(AppiumBy.accessibilityId("test-Item title")).text());
+                productItem.price(convertDollarStringToDouble(productElement.$(AppiumBy.accessibilityId("test-Price")).text()));
                 productItems.add(productItem);
             }
             scrollDown();
@@ -67,14 +68,14 @@ public class MobileAllItemsPage extends MobileBasePage {
 
     public MobileAllItemsPage addProductToCard(String productName) {
         while (true) {
-            ElementsCollection products = $(MobileBy.AccessibilityId("test-PRODUCTS"))
-                    .$$(MobileBy.AccessibilityId("test-Item"));
+            ElementsCollection products = $(AppiumBy.accessibilityId("test-PRODUCTS"))
+                    .$$(AppiumBy.accessibilityId("test-Item"));
             for (SelenideElement product : products) {
-                if (product.$(MobileBy.AccessibilityId("test-Item title")).is(Condition.not(Condition.visible))){
+                if (product.$(AppiumBy.accessibilityId("test-Item title")).is(Condition.not(Condition.visible))){
                     break;
                 }
-                if (productName.equals(product.$(MobileBy.AccessibilityId("test-Item title")).text())) {
-                    product.$(MobileBy.AccessibilityId("test-ADD TO CART")).click();
+                if (productName.equals(product.$(AppiumBy.accessibilityId("test-Item title")).text())) {
+                    product.$(AppiumBy.accessibilityId("test-ADD TO CART")).click();
                     scrollUpToTop();
                     return new MobileAllItemsPage();
                 }
@@ -86,11 +87,11 @@ public class MobileAllItemsPage extends MobileBasePage {
 
     public MobileAllItemsPage removeFromCart(String productName) {
         while (true) {
-            ElementsCollection products = $(MobileBy.AccessibilityId("test-PRODUCTS"))
-                    .$$(MobileBy.AccessibilityId("test-Item"));
+            ElementsCollection products = $(AppiumBy.accessibilityId("test-PRODUCTS"))
+                    .$$(AppiumBy.accessibilityId("test-Item"));
             for (SelenideElement product : products) {
-                if (productName.equals(product.$(MobileBy.AccessibilityId("test-Item title")).text())) {
-                    product.$(MobileBy.AccessibilityId("test-REMOVE")).click();
+                if (productName.equals(product.$(AppiumBy.accessibilityId("test-Item title")).text())) {
+                    product.$(AppiumBy.accessibilityId("test-REMOVE")).click();
                     scrollUpToTop();
                     return new MobileAllItemsPage();
                 }
@@ -100,7 +101,7 @@ public class MobileAllItemsPage extends MobileBasePage {
     }
 
     public MobileAllItemsPage sort(SortDirection sortDirection) {
-        $(MobileBy.AccessibilityId("Selector container"))
+        $(AppiumBy.accessibilityId("Selector container"))
                 .$$x(".//android.widget.TextView")
                 .find(Condition.exactText(sortDirection.getText()))
                 .click();
@@ -109,8 +110,8 @@ public class MobileAllItemsPage extends MobileBasePage {
 
     public MobileProductPage selectProduct(String productName) {
         while (true) {
-            SelenideElement element = $(MobileBy.AccessibilityId("test-PRODUCTS"))
-                    .$$(MobileBy.AccessibilityId("test-Item title"))
+            SelenideElement element = $(AppiumBy.accessibilityId("test-PRODUCTS"))
+                    .$$(AppiumBy.accessibilityId("test-Item title"))
                     .find(Condition.exactText(productName));
             if (element.is(Condition.visible)) {
                 element.click();

@@ -6,6 +6,7 @@ import static com.codeborne.selenide.Selenide.$$;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.MobileBy;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -24,7 +25,7 @@ public class MobileCheckOutFinishPage extends MobileBasePage {
 
         paymentInfo
                 .products(getAllItemsFromPage());
-        ElementsCollection selenideElements = $(MobileBy.AccessibilityId("test-CHECKOUT: OVERVIEW"))
+        ElementsCollection selenideElements = $(AppiumBy.accessibilityId("test-CHECKOUT: OVERVIEW"))
                 .$$x(".//android.widget.TextView");
 
         paymentInfo.cardInfo(findNodeAndReturnStringValueOfNext(selenideElements, "Payment Information:"))
@@ -41,24 +42,24 @@ public class MobileCheckOutFinishPage extends MobileBasePage {
     }
 
     public MobileAllItemsPage cancel() {
-        scrollUntilElementIsVisibleAndClick($(MobileBy.AccessibilityId("test-CANCEL")));
+        scrollUntilElementIsVisibleAndClick($(AppiumBy.accessibilityId("test-CANCEL")));
         return new MobileAllItemsPage();
     }
 
     public MobileCheckoutCompletePage finish() {
-        scrollUntilElementIsVisibleAndClick($(MobileBy.AccessibilityId("test-FINISH")));
+        scrollUntilElementIsVisibleAndClick($(AppiumBy.accessibilityId("test-FINISH")));
         return new MobileCheckoutCompletePage();
     }
 
 
     @SneakyThrows
     public List<ProductItem> getAllItemsFromPage() {
-        SelenideElement listElement = $(MobileBy.AccessibilityId("test-CHECKOUT: OVERVIEW"));
+        SelenideElement listElement = $(AppiumBy.accessibilityId("test-CHECKOUT: OVERVIEW"));
         Set<ProductItem> productItems = new HashSet<>();
 
         while (true) {
             List<SelenideElement> fullProducts = new ArrayList<>();
-            ElementsCollection products = listElement.$$(MobileBy.AccessibilityId("test-Item"));
+            ElementsCollection products = listElement.$$(AppiumBy.accessibilityId("test-Item"));
             for (SelenideElement element : products) {
                 ElementsCollection childElements = element
                         .$$x(".//*");
@@ -73,14 +74,14 @@ public class MobileCheckOutFinishPage extends MobileBasePage {
             for (SelenideElement element : fullProducts) {
                 ProductItem productItem = new ProductItem();
 
-                ElementsCollection description = element.$(MobileBy.AccessibilityId("test-Description"))
+                ElementsCollection description = element.$(AppiumBy.accessibilityId("test-Description"))
                         .$$x(".//android.widget.TextView");
 
                 productItem.itemName(description.get(0).text());
                 productItem.description(description.get(1).text());
                 productItem.price(convertDollarStringToDouble(
                         element
-                                .$(MobileBy.AccessibilityId("test-Price"))
+                                .$(AppiumBy.accessibilityId("test-Price"))
                                 .$x(".//android.widget.TextView")
                                 .text()));
                 productItems.add(productItem);
