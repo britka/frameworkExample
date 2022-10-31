@@ -26,6 +26,11 @@ public class AppFactory {
                 Configuration.browser = AndroidDriverProvider.class.getName();
                 return new MobileApplication();
             }
+            case "remote_mobile":{
+                log.info("Init remote mobile instance");
+                Configuration.browser = AndroidRemotrDriverProvider.class.getName();
+                return new MobileApplication();
+            }
         }
         return null;
     }

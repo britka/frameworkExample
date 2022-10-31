@@ -4,6 +4,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.$x;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -20,6 +21,10 @@ public class AllItemsPage extends BasePage {
     public List<ProductItem> getAllItemsFromPage() {
         ElementsCollection itemElements = $$(".inventory_item");
         return getProductItemsList(itemElements);
+    }
+
+    public boolean isOnPage(){
+        return $("#react-burger-menu-btn").is(Condition.visible);
     }
 
     public AllItemsPage addProductToCard(String productName) {

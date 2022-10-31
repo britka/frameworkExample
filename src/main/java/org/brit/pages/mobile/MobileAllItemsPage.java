@@ -20,10 +20,8 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidTouchAction;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+
 import lombok.SneakyThrows;
 import org.brit.models.ProductItem;
 import org.brit.models.SortDirection;
@@ -37,7 +35,7 @@ public class MobileAllItemsPage extends MobileBasePage {
     @SneakyThrows
     public List<ProductItem> getAllItemsFromPage() {
         SelenideElement listElement = $(AppiumBy.accessibilityId("test-PRODUCTS"));
-        Set<ProductItem> productItems = new HashSet<>();
+        Set<ProductItem> productItems = new LinkedHashSet<>();
 
         while (true) {
             List<SelenideElement> fullProducts = new ArrayList<>();
@@ -101,10 +99,14 @@ public class MobileAllItemsPage extends MobileBasePage {
     }
 
     public MobileAllItemsPage sort(SortDirection sortDirection) {
+        scrollUpToTop();
+        $(AppiumBy.accessibilityId("test-Modal Selector Button")).click();
         $(AppiumBy.accessibilityId("Selector container"))
                 .$$x(".//android.widget.TextView")
                 .find(Condition.exactText(sortDirection.getText()))
                 .click();
+        $(AppiumBy.accessibilityId("Selector container")).shouldNotBe(Condition.visible);
+        sleep(2000);
         return new MobileAllItemsPage();
     }
 

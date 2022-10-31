@@ -12,7 +12,7 @@ public class MobileAllItems extends MobileApplication implements IAllItems {
 
     @Override
     public MobileAllItems sort(SortDirection sortDirection) {
-        mobileAllItemsPage.sort(sortDirection);
+        mobileAllItemsPage = mobileAllItemsPage.sort(sortDirection);
         return this;
     }
 
