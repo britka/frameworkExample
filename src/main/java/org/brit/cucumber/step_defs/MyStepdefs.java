@@ -5,6 +5,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.brit.pages.web.AllItemsPage;
+import org.brit.pages.web.CartPage;
 import org.brit.pages.web.LoginPage;
 import org.testng.Assert;
 
@@ -40,5 +41,19 @@ public class MyStepdefs extends BaseStepDef{
     @Given("User is on login page")
     public void userIsOnLoginPage() {
         open("https://www.saucedemo.com");
+    }
+
+    @Then("User should be on the cart page, and the cart must have selected products")
+    public void userShouldBeOnTheCartPageAndTheCartMustHaveSelectedProducts() {
+        new CartPage();
+    }
+    @And("Click Remove")
+    public void clickRemove() {
+        new CartPage().removeProductFromCart("Sauce Labs Backpack");
+    }
+
+    @Then("The user will see an empty shopping cart")
+    public void theUserWillSeeAnEmptyShoppingCart() {
+        new CartPage();
     }
 }
