@@ -71,7 +71,7 @@ public class MyStepdefs extends BaseStepDef{
         Assert.assertEquals(WebDriverRunner.url(), urlGoToAbout);
     }
 
-    @When("User click Back to products")
+    @And("User click Back to products")
     public void userClickBackToProducts() {
         new ProductPage().backToProducts();
     }
