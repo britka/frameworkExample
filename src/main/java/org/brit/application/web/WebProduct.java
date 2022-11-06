@@ -26,6 +26,11 @@ public class WebProduct extends WebApplication implements IProduct {
     }
 
     @Override
+    public ProductItem getProductInformation() {
+        return null;
+    }
+
+    @Override
     public IAllItems backToProducts() {
         productPage.backToProducts();
         return new WebAllItems();

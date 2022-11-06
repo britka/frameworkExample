@@ -13,6 +13,7 @@ import java.util.List;
 import lombok.SneakyThrows;
 import org.brit.models.ProductItem;
 import org.brit.models.SortDirection;
+import org.brit.pages.MenuItem;
 import org.checkerframework.checker.units.qual.A;
 
 public class AllItemsPage extends BasePage {
@@ -52,6 +53,10 @@ public class AllItemsPage extends BasePage {
         $x("//div[@class='inventory_item_label']/a[contains(.,'" + productName + "')]")
                 .click();
         return new ProductPage();
+    }
+    public AboutSauceLab goToAboutSauceLabs(){
+        new AllItemsPage().menu().selectMenuItem(MenuItem.ABOUT);
+        return new AboutSauceLab();
     }
 
 

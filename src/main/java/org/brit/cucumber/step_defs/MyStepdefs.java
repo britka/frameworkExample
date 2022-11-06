@@ -1,11 +1,14 @@
 package org.brit.cucumber.step_defs;
 
+import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.brit.pages.web.AboutSauceLab;
 import org.brit.pages.web.AllItemsPage;
 import org.brit.pages.web.LoginPage;
+import org.brit.pages.web.ProductPage;
 import org.testng.Assert;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -41,4 +44,36 @@ public class MyStepdefs extends BaseStepDef{
     public void userIsOnLoginPage() {
         open("https://www.saucedemo.com");
     }
+
+    @When("User select product by name {string}")
+    public void userSelectProductByName(String productName) {
+        new AllItemsPage().selectProduct(productName);
+    }
+
+    @Then("User should be on Product Page")
+    public void userShouldBeOnProductPage() {
+        Assert.assertTrue(new ProductPage().isOnPage());
+    }
+
+    @And("Name of the product on the Product Page should be corresponds selected product name {string}")
+    public void nameOfTheSelectedProductAndProductOnProductPageAreCorresponds(String productName) {
+        Assert.assertEquals(new ProductPage().getProductInformation().itemName(), productName);
+    }
+
+    @When("User select in burger menu About")
+    public void userSelectMenuItemsAbout() {
+        new AllItemsPage().goToAboutSauceLabs();
+    }
+
+    @Then("User should be on page by url {string}")
+    public void userShouldBeOnAboutPage(String urlGoToAbout) {
+        Assert.assertTrue(new AboutSauceLab().isOnPage());
+        Assert.assertEquals(WebDriverRunner.url(), urlGoToAbout);
+    }
+
+    @When("User click Back to products")
+    public void userClickBackToProducts() {
+        new ProductPage().backToProducts();
+    }
+
 }

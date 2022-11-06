@@ -26,6 +26,11 @@ public class MobileProduct extends MobileApplication implements IProduct {
     }
 
     @Override
+    public ProductItem getProductInformation() {
+        return null;
+    }
+
+    @Override
     public IAllItems backToProducts() {
         mobileProductPage.backToProducts();
         return new MobileAllItems();

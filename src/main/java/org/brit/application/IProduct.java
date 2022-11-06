@@ -7,5 +7,8 @@ public interface IProduct extends IApplication{
     IProduct addProductToCart();
     IProduct removeProductFromCart();
     ProductItem getProductInfo();
+
+    ProductItem getProductInformation();
+
     IAllItems backToProducts();
 }
