@@ -1,4 +1,4 @@
-Feature: Remove products from Cart
+Feature: ContinueShopping
 
   Background:
     Given User is on login page

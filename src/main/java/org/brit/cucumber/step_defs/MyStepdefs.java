@@ -5,6 +5,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.brit.pages.web.AllItemsPage;
+import org.brit.pages.web.CartPage;
 import org.brit.pages.web.LoginPage;
 import org.testng.Assert;
 
@@ -41,4 +42,11 @@ public class MyStepdefs extends BaseStepDef{
     public void userIsOnLoginPage() {
         open("https://www.saucedemo.com");
     }
+
+    @And("Click on ContinueShopping button")
+    public void clickOnContinueShoppingButton() {
+        CartPage cartPage = new CartPage();
+        cartPage.continueShopping();
+    }
+
 }
