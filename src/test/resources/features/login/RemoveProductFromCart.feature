@@ -7,13 +7,13 @@ Feature: Remove products from Cart
 
   Scenario: Add to cart 2 products and remove 1 on Main page
     Given User select products:
-      | Sauce Labs Backpack               |
-      | Test.allTheThings() T-Shirt (Red) |
-    And Remove product on Main page
+      | Sauce Labs Backpack      |
+      | Sauce Labs Fleece Jacket |
+    And Remove product on AllItems page
       | Sauce Labs Backpack |
     When Click on cart button
     Then Cart should have product
-      | Test.allTheThings() T-Shirt (Red) |
+      | Sauce Labs Fleece Jacket |
 
   Scenario: Add to cart 2 products and remove 1 on Cart page
     Given User select products:
@@ -24,5 +24,14 @@ Feature: Remove products from Cart
       | Sauce Labs Backpack |
     Then Cart should have product
       | Test.allTheThings() T-Shirt (Red) |
+
+
+
+
+
+
+
+
+
 
 

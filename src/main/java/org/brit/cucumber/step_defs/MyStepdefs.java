@@ -4,10 +4,13 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.brit.models.ProductItem;
 import org.brit.pages.web.AllItemsPage;
 import org.brit.pages.web.CartPage;
 import org.brit.pages.web.LoginPage;
 import org.testng.Assert;
+
+import java.util.List;
 
 import static com.codeborne.selenide.Selenide.open;
 
@@ -48,5 +51,6 @@ public class MyStepdefs extends BaseStepDef{
         CartPage cartPage = new CartPage();
         cartPage.continueShopping();
     }
+
 
 }

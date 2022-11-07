@@ -88,4 +88,14 @@ public class AllProductsStepdefs {
         Assert.assertTrue(new CheckoutCompletePage().isOnPage());
     }
 
+
+    @And("Remove product on Cart page")
+    public void removeProductOnCartPage(String productName) {
+        new CartPage().removeProductFromCart(productName);
+    }
+
+    @And("Remove product on AllItems page")
+    public void removeProductOnAllItemsPage(String productName) {
+        new AllItemsPage().removeFromCart(productName);
+    }
 }
