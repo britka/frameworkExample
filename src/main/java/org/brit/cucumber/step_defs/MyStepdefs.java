@@ -4,17 +4,14 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.brit.models.ProductItem;
 import org.brit.pages.web.AllItemsPage;
 import org.brit.pages.web.CartPage;
 import org.brit.pages.web.LoginPage;
 import org.testng.Assert;
 
-import java.util.List;
-
 import static com.codeborne.selenide.Selenide.open;
 
-public class MyStepdefs extends BaseStepDef{
+public class MyStepdefs extends BaseStepDef {
 
     @Then("User should be on main product page")
     public void userShouldBeOnMainProductPage() {
@@ -52,5 +49,16 @@ public class MyStepdefs extends BaseStepDef{
         cartPage.continueShopping();
     }
 
+    @Then("Cart should have product")
+    public void cartShouldHaveProduct(String product) {
+        String nameOfProductInCart = new CartPage().getProductItemsList().get(0).itemName();
+        int numberOfProductsInCart = new CartPage().getProductItemsList().size();
+        Assert.assertEquals(product, nameOfProductInCart);
+        Assert.assertEquals(numberOfProductsInCart, 1);
+    }
 
+    @And("Cart is empty")
+    public void cartIsEmpty() {
+        new CartPage().clearCartFromProducts();
+    }
 }

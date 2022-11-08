@@ -1,16 +1,12 @@
 package org.brit.pages.web;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
-import static com.codeborne.selenide.Selenide.$x;
-
 import com.codeborne.selenide.ElementsCollection;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.SneakyThrows;
 import org.brit.models.ProductItem;
+
+import java.util.List;
+
+import static com.codeborne.selenide.Selenide.*;
 
 public class CartPage extends BasePage {
 
@@ -36,5 +32,10 @@ public class CartPage extends BasePage {
     public CheckOut1Page checkout() {
         $("#checkout").click();
         return new CheckOut1Page();
+    }
+
+    public void clearCartFromProducts() {
+        List<ProductItem> productItemsList = getProductItemsList();
+        productItemsList.clear();
     }
 }
