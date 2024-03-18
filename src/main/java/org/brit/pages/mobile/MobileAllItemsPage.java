@@ -1,34 +1,20 @@
 package org.brit.pages.mobile;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
-import static com.codeborne.selenide.Selenide.$$x;
-import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.sleep;
-import static com.codeborne.selenide.Selenide.webdriver;
-import static io.appium.java_client.touch.WaitOptions.waitOptions;
-import static io.appium.java_client.touch.offset.PointOption.point;
-import static java.time.Duration.ofMillis;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.appium.java_client.AppiumBy;
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.PerformsTouchActions;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.android.AndroidTouchAction;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.*;
-
 import lombok.SneakyThrows;
 import org.brit.models.ProductItem;
 import org.brit.models.SortDirection;
-import org.brit.pages.web.BasePage;
-import org.brit.pages.web.ProductPage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
+
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 
 public class MobileAllItemsPage extends MobileBasePage {
 
@@ -52,6 +38,7 @@ public class MobileAllItemsPage extends MobileBasePage {
                 scrollUpToTop();
                 return new ArrayList<>(productItems);
             }
+            int beforeAddingCount = productItems.size();
             for (SelenideElement element : fullProducts) {
                 ProductItem productItem = new ProductItem();
                 SelenideElement productElement = element
@@ -59,6 +46,9 @@ public class MobileAllItemsPage extends MobileBasePage {
                 productItem.itemName(productElement.$(AppiumBy.accessibilityId("test-Item title")).text());
                 productItem.price(convertDollarStringToDouble(productElement.$(AppiumBy.accessibilityId("test-Price")).text()));
                 productItems.add(productItem);
+            }
+            if (beforeAddingCount == productItems.size()){
+                return new ArrayList<>(productItems);
             }
             scrollDown();
         }

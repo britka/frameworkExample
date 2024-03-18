@@ -9,14 +9,11 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.appium.java_client.AppiumBy;
-import io.appium.java_client.MobileBy;
+
 import io.appium.java_client.functions.ExpectedCondition;
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+
 import lombok.SneakyThrows;
 import org.brit.models.ProductItem;
 import org.brit.pages.web.AllItemsPage;
@@ -43,14 +40,15 @@ public class MobileCartPage extends MobileBasePage {
             for (SelenideElement element : products) {
                 ElementsCollection childElements = element
                         .$$x(".//*");
-                if (childElements.size() >= 12) {
+                if (childElements.size() >= 11) {
                     fullProducts.add(element);
                 }
             }
             if (fullProducts.size() == 0) {
                 scrollUpToTop();
-                return new ArrayList<>(productItems);
+                return new LinkedList<>(productItems);
             }
+
             for (SelenideElement element : fullProducts) {
                 ProductItem productItem = new ProductItem();
 
@@ -64,6 +62,7 @@ public class MobileCartPage extends MobileBasePage {
                 productItem.price(convertDollarStringToDouble(price.text()));
                 productItems.add(productItem);
             }
+
             scrollDown(0.5, 0.7, 0.25);
         }
     }

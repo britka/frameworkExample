@@ -28,7 +28,7 @@ public class AllItemsPage extends BasePage {
     }
 
     public AllItemsPage addProductToCard(String productName) {
-        $x("//div[@class='inventory_item_name'][text()='" + productName + "']"
+        $x("//div[@class='inventory_item_name '][text()='" + productName + "']"
                 + "/ancestor::div[@class='inventory_item']"
                 + "//button[starts-with(@name, 'add-to-cart')]")
                 .click();
@@ -36,7 +36,7 @@ public class AllItemsPage extends BasePage {
     }
 
     public AllItemsPage removeFromCart(String productName) {
-        $x("//div[@class='inventory_item_name'][text()='" + productName + "']"
+        $x("//div[@class='inventory_item_name '][text()='" + productName + "']"
                 + "/ancestor::div[@class='inventory_item']"
                 + "//button[starts-with(@name, 'remove-')]")
                 .click();

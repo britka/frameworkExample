@@ -3,7 +3,7 @@ package org.brit.pages.mobile;
 import static com.codeborne.selenide.Selenide.$;
 
 import io.appium.java_client.AppiumBy;
-import io.appium.java_client.MobileBy;
+
 import org.brit.pages.web.CartPage;
 import org.brit.pages.web.CheckOut1Page;
 import org.brit.pages.web.CheckOutFinishPage;

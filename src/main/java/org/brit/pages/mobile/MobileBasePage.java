@@ -2,14 +2,19 @@ package org.brit.pages.mobile;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import com.google.common.collect.ImmutableList;
 import io.appium.java_client.AppiumBy;
-import io.appium.java_client.MobileBy;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.functions.ExpectedCondition;
 import lombok.SneakyThrows;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.interactions.Pause;
+import org.openqa.selenium.interactions.PointerInput;
+import org.openqa.selenium.interactions.Sequence;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -26,8 +31,8 @@ public class MobileBasePage {
     MobileMenuComponent menuComponent;
 
     public Integer getCartProductsCount() {
-        if (shopping_cart_link.$(By.className("android.widget.TextView")).is(Condition.visible)) {
-            return Integer.parseInt(shopping_cart_link.$(By.className("android.widget.TextView")).text());
+        if (shopping_cart_link.$(AppiumBy.className("android.widget.TextView")).is(Condition.visible)) {
+            return Integer.parseInt(shopping_cart_link.$(AppiumBy.className("android.widget.TextView")).text());
         }
         return 0;
     }
@@ -52,11 +57,30 @@ public class MobileBasePage {
         int anchor = (int) (size.width * anchorPercentage);
         int startPoint = (int) (size.height * startPercentage);
         int endPoint = (int) (size.height * endPercentage);
-        new TouchAction((PerformsTouchActions) webdriver().object())
-                .press(point(anchor, startPoint))
-                .waitAction(waitOptions(ofMillis(1000)))
-                .moveTo(point(anchor, endPoint))
-                .release().perform();
+
+        PointerInput pointerInput = new PointerInput(PointerInput.Kind.TOUCH, "finger1");
+
+        Sequence swipe = new Sequence(pointerInput, 0);
+        swipe
+                .addAction(pointerInput.createPointerMove(
+                        Duration.ofSeconds(1),
+                        PointerInput.Origin.viewport(),
+                        new Point(anchor, startPoint)))
+                .addAction(pointerInput.createPointerDown(PointerInput.MouseButton.LEFT.asArg()))
+                //.addAction(new Pause(pointerInput, Duration.ofSeconds(1)))
+                .addAction(pointerInput.createPointerMove(
+                        Duration.ofSeconds(1),
+                        PointerInput.Origin.viewport(),
+                        new Point(anchor, endPoint)))
+                .addAction(pointerInput.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+        ((AppiumDriver)webdriver().object()).perform(ImmutableList.of(swipe));
+
+
+//        new TouchAction((PerformsTouchActions) webdriver().object())
+//                .press(point(anchor, startPoint))
+//                .waitAction(waitOptions(ofMillis(1000)))
+//                .moveTo(point(anchor, endPoint))
+//                .release().perform();
     }
 
     protected void scrollUpToTop() {

@@ -1,6 +1,7 @@
 package org.brit.pages.web;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
@@ -16,6 +17,10 @@ public class MenuComponent {
             burgerButton.click();
         }
         menu.$$("a").find(Condition.exactText(menuItem.getValue())).click();
+        sleep(700);
+        if (menu.is(Condition.visible)){
+            menu.parent().parent().$(".bm-cross-button").click();
+        }
     }
 
 

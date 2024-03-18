@@ -1,6 +1,7 @@
 package org.brit.cucumber.step_defs;
 
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -9,13 +10,14 @@ import io.cucumber.java.it.Ma;
 import org.brit.models.ProductItem;
 import org.brit.models.SortDirection;
 import org.brit.pages.web.*;
+import org.brit.webdriver.AppFactory;
 import org.testng.Assert;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-public class AllProductsStepdefs {
+public class AllProductsStepdefs{
 
     private List<ProductItem> listBeforeSorting;
     private List<ProductItem> listAfterSorting;

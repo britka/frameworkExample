@@ -1,16 +1,18 @@
 package org.brit.cucumber.step_defs;
 
+import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.brit.pages.web.AllItemsPage;
 import org.brit.pages.web.LoginPage;
+import org.brit.webdriver.AppFactory;
 import org.testng.Assert;
 
 import static com.codeborne.selenide.Selenide.open;
 
-public class MyStepdefs extends BaseStepDef{
+public class MyStepdefs{
 
     @Then("User should be on main product page")
     public void userShouldBeOnMainProductPage() {

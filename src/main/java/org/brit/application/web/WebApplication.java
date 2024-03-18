@@ -35,7 +35,7 @@ public class WebApplication implements IApplication {
 
     @Override
     public IApplication goToApp() {
-        open("/");
+        open("https://www.saucedemo.com");
         return this;
     }
 }

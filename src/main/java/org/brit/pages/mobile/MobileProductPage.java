@@ -1,14 +1,10 @@
 package org.brit.pages.mobile;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
-
 import com.codeborne.selenide.SelenideElement;
 import io.appium.java_client.AppiumBy;
-import io.appium.java_client.MobileBy;
 import org.brit.models.ProductItem;
-import org.brit.pages.web.AllItemsPage;
-import org.brit.pages.web.ProductPage;
+
+import static com.codeborne.selenide.Selenide.$;
 
 public class MobileProductPage extends MobileBasePage{
     public MobileProductPage addToCart() {
@@ -46,7 +42,7 @@ public class MobileProductPage extends MobileBasePage{
     }
 
     public MobileAllItemsPage backToProducts() {
-        $(MobileBy.AccessibilityId("test-BACK TO PRODUCTS")).click();
+        $(AppiumBy.accessibilityId("test-BACK TO PRODUCTS")).click();
         return new MobileAllItemsPage();
     }
 
