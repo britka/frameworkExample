@@ -25,19 +25,31 @@ public class AndroidDriverProvider implements WebDriverProvider {
     @SneakyThrows
     @Nonnull
     public WebDriver createDriver(Capabilities desiredCapabilities) {
+        AppiumDriverLocalService service = AppiumDriverLocalService.buildDefaultService();
+        service.start();
+
         closeWebDriver();
        // Configuration.startMaximized = false;
+        Configuration.timeout = 30000;
         Configuration.browserSize = null;
-        DesiredCapabilities capability = new DesiredCapabilities();
-        capability.setCapability("deviceName", "emulator-5554");
-      //  capability.setCapability("platformVersion", "10");
-        capability.setCapability("platformName", "Android");
-        capability.setCapability("app", new File("app/app.apk").getAbsolutePath());
-        capability.setCapability("appPackage", "com.swaglabsmobileapp");
-        capability.setCapability("appActivity", ".MainActivity");
-        capability.setCapability("automationName", "UiAutomator2");
+
+        UiAutomator2Options options = new UiAutomator2Options();
+        options.setDeviceName("emulator-5554")
+                .setPlatformName("Android")
+                .setApp(new File("app/app.apk").getAbsolutePath())
+                .setAppPackage("com.swaglabsmobileapp")
+                .setAppActivity(".MainActivity");
+
+//        DesiredCapabilities capability = new DesiredCapabilities();
+//        capability.setCapability("deviceName", "emulator-5554");
+//      //  capability.setCapability("platformVersion", "10");
+//        capability.setCapability("platformName", "Android");
+//        capability.setCapability("app", new File("app/app.apk").getAbsolutePath());
+//        capability.setCapability("appPackage", "com.swaglabsmobileapp");
+//        capability.setCapability("appActivity", ".MainActivity");
+//        capability.setCapability("automationName", "UiAutomator2");
        // desiredCapabilities.merge(capability);
-        androidDriver = new AndroidDriver(new URL("http://127.0.0.1:4723/"), capability);
+        androidDriver = new AndroidDriver(new URL("http://127.0.0.1:4723/"), options);
         return androidDriver;
     }
 }
