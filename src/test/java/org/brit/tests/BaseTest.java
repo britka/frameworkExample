@@ -2,10 +2,10 @@ package org.brit.tests;
 
 import org.brit.application.IApplication;
 import org.brit.webdriver.AppFactory;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
 
 public class BaseTest {
     public IApplication application;
@@ -13,6 +13,11 @@ public class BaseTest {
     @BeforeClass
     public void beforeSuite(){
         application = AppFactory.initApp();
+    }
+
+    @AfterClass
+    public void afterClass(){
+        application.closeApp();
     }
 
     @BeforeMethod

@@ -6,4 +6,5 @@ public interface IApplication {
     Integer getProductsCountInCart();
     ICart goToCart();
     IApplication goToApp();
+    void closeApp();
 }

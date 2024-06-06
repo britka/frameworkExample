@@ -1,13 +1,14 @@
 package org.brit.application.web;
 
-import static com.codeborne.selenide.Selenide.open;
-
 import org.brit.application.IAllItems;
 import org.brit.application.IApplication;
 import org.brit.application.ICart;
 import org.brit.application.IMenu;
 import org.brit.pages.web.BasePage;
 import org.brit.pages.web.LoginPage;
+
+import static com.codeborne.selenide.Selenide.closeWebDriver;
+import static com.codeborne.selenide.Selenide.open;
 
 public class WebApplication implements IApplication {
 
@@ -37,5 +38,10 @@ public class WebApplication implements IApplication {
     public IApplication goToApp() {
         open("https://www.saucedemo.com");
         return this;
+    }
+
+    @Override
+    public void closeApp() {
+        closeWebDriver();
     }
 }

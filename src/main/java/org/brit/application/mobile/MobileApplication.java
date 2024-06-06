@@ -1,14 +1,13 @@
 package org.brit.application.mobile;
 
-import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.appium.ScreenObject.screen;
-
 import org.brit.application.IAllItems;
 import org.brit.application.IApplication;
 import org.brit.application.ICart;
 import org.brit.application.IMenu;
 import org.brit.pages.mobile.MobileBasePage;
 import org.brit.pages.mobile.MobileLoginPage;
+
+import static com.codeborne.selenide.Selenide.open;
 
 public class MobileApplication implements IApplication {
 
@@ -38,5 +37,10 @@ public class MobileApplication implements IApplication {
     public IApplication goToApp() {
         open();
         return new MobileApplication();
+    }
+
+    @Override
+    public void closeApp() {
+
     }
 }
