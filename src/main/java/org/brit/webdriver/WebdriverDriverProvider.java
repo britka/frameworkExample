@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import javax.annotation.Nonnull;
 import java.util.Map;
 
 /**
@@ -15,12 +14,11 @@ import java.util.Map;
  * 18.03.2024 19:16
  **/
 public class WebdriverDriverProvider implements WebDriverProvider {
-    @Nonnull
     @Override
-    public WebDriver createDriver(@Nonnull Capabilities capabilities) {
+    public WebDriver createDriver(Capabilities capabilities) {
         ChromeOptions options = new ChromeOptions();
         //options.merge(capabilities);
-      //  options.setBrowserVersion("121");
+        //  options.setBrowserVersion("121");
         // options.addArguments("--incognito");
         options.setExperimentalOption("prefs",
                 Map.of("credentials_enable_service", false,

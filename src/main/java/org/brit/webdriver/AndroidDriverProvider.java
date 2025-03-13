@@ -8,7 +8,6 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import java.io.File;
 import java.net.URL;
-import javax.annotation.Nonnull;
 
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.remote.options.BaseOptions;
@@ -23,10 +22,9 @@ public class AndroidDriverProvider implements WebDriverProvider {
     AndroidDriver androidDriver;
 
     @SneakyThrows
-    @Nonnull
     public WebDriver createDriver(Capabilities desiredCapabilities) {
-        AppiumDriverLocalService service = AppiumDriverLocalService.buildDefaultService();
-        service.start();
+//        AppiumDriverLocalService service = AppiumDriverLocalService.buildDefaultService();
+//        service.start();
 
         closeWebDriver();
        // Configuration.startMaximized = false;
@@ -34,7 +32,7 @@ public class AndroidDriverProvider implements WebDriverProvider {
         Configuration.browserSize = null;
 
         UiAutomator2Options options = new UiAutomator2Options();
-        options.setDeviceName("emulator-5554")
+        options.setDeviceName("325f53520421")
                 .setPlatformName("Android")
                 .setApp(new File("app/app.apk").getAbsolutePath())
                 .setAppPackage("com.swaglabsmobileapp")

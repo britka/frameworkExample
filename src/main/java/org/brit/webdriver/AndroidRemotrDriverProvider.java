@@ -9,7 +9,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import javax.annotation.Nonnull;
 import java.io.File;
 import java.net.URL;
 
@@ -20,17 +19,16 @@ public class AndroidRemotrDriverProvider implements WebDriverProvider {
     AndroidDriver androidDriver;
 
     @SneakyThrows
-    @Nonnull
     public WebDriver createDriver(Capabilities desiredCapabilities) {
         closeWebDriver();
-       // Configuration.startMaximized = false;
-       // Configuration.startMaximized = false;
+        // Configuration.startMaximized = false;
+        // Configuration.startMaximized = false;
         Configuration.browserSize = null;
         DesiredCapabilities capability = new DesiredCapabilities();
         capability.setCapability("deviceName", "android");
         capability.setCapability("browserVersion", "8.1");
-      //  capability.setCapability("platformVersion", "8.1");
-      //  capability.setCapability("platformName", "Android");
+        //  capability.setCapability("platformVersion", "8.1");
+        //  capability.setCapability("platformName", "Android");
         capability.setCapability("app", new File("app/app.apk").getAbsolutePath());
         capability.setCapability("appPackage", "com.swaglabsmobileapp");
         capability.setCapability("appActivity", ".MainActivity");

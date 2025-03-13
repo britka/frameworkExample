@@ -15,8 +15,8 @@ public class AppFactory {
         switch (property) {
             case "web": {
                 log.info("Init web instance");
-               // Configuration.browser = WebdriverDriverProvider.class.getName();
-                Configuration.browser = PlaywrightiumProvider.class.getName();
+                Configuration.browser = WebdriverDriverProvider.class.getName();
+               // Configuration.browser = PlaywrightiumProvider.class.getName();
                 return new WebApplication();
             }
             case "web_pw": {
